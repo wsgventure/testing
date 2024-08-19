@@ -1,13 +1,5 @@
 import React from "react";
 
-async function getDailyFIIDIIData() {
-  // Daily FII/DII Data api
-  const url = "https://www.nseindia.com/api/fiidiiTradeReact";
-  const res = await fetch(url);
-  const data = await res.json();
-  return data;
-}
-
 interface item {
   category: string;
   date: string;
@@ -17,7 +9,8 @@ interface item {
 }
 
 async function FIIDIIActivity() {
-  const fiiDiiJson: item[] = await getDailyFIIDIIData();
+  const res = await fetch(`${process.env.NEXT_PUBLIC_NSE_API_URL}/api/fiidiiTradeReact`);
+  const fiiDiiJson: item[] = await res.json();
 
   return <div>{JSON.stringify(fiiDiiJson)}</div>;
 }
