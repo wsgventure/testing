@@ -8,6 +8,7 @@
 
 const nextConfig = {
   reactStrictMode: false,
+  staticPageGenerationTimeout: 1000
   // async redirects() {
   //   return [
   //     {
