@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface item {
   category: string;
@@ -9,10 +9,37 @@ interface item {
 }
 
 async function FIIDIIActivity() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_NSE_API_URL}/api/fiidiiTradeReact`);
-  const fiiDiiJson: item[] = await res.json();
+  const [values, setValues] = useState<item[]>([]);
+  const [error, setError] = useState<null | string | unknown>(null);
 
-  return <div>{JSON.stringify(fiiDiiJson)}</div>;
+  useEffect(() => {
+    async function getData() {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_NSE_API_URL}/api/fiidiiTradeReact`
+        );
+        const data = await res.json();
+        return { success: true, data };
+      } catch (error) {
+        return { success: false, error };
+      }
+    }
+
+    getData().then((response) => {
+      if (response.success) {
+        setValues(response.data);
+      } else {
+        setError(response.error);
+      }
+    });
+  }, []);
+
+  return (
+    <>
+      <div>{JSON.stringify(values)}</div>
+      <div>error: {JSON.stringify(error)}</div>
+    </>
+  );
 }
 
 export default FIIDIIActivity;
