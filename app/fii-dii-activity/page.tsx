@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 
 interface item {
@@ -8,7 +10,7 @@ interface item {
   netValue: string;
 }
 
-async function FIIDIIActivity() {
+export default function FIIDIIActivity() {
   const [values, setValues] = useState<item[]>([]);
   const [error, setError] = useState<null | string | unknown>(null);
 
@@ -41,5 +43,3 @@ async function FIIDIIActivity() {
     </>
   );
 }
-
-export default FIIDIIActivity;
