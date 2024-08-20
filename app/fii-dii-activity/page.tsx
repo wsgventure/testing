@@ -18,7 +18,8 @@ export default function FIIDIIActivity() {
     async function getData() {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_NSE_API_URL}/api/fiidiiTradeReact`
+          `${process.env.NEXT_PUBLIC_NSE_API_URL}/api/fiidiiTradeReact`,
+          { mode: 'no-cors'}
         );
         const data = await res.json();
         return { success: true, data };
